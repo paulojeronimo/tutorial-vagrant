@@ -1,0 +1,87 @@
+#!/bin/bash
+
+TUT=tutorial-vagrant
+ASCIIDOCTOR_PROJECTS_DIR=${ASCIIDOCTOR_PROJECTS_DIR:-~/Projects/github.com/asciidoctor}
+
+sed_i() {
+    case `uname` in
+        Darwin) sed -i '' "$@";;
+        Linux) sed -i "$@";;
+    esac    
+}
+
+_html() {
+    asciidoctor README.asciidoc -o index.html
+}
+
+_pdf() {
+    pushd . &> /dev/null
+    mkdir -p "$ASCIIDOCTOR_PROJECTS_DIR"
+    cd "$ASCIIDOCTOR_PROJECTS_DIR"
+    [ -d asciidoctor-fopub ] || git clone https://github.com/asciidoctor/asciidoctor-fopub
+    popd &> /dev/null
+
+    export PATH="$ASCIIDOCTOR_PROJECTS_DIR"/asciidoctor-fopub:$PATH
+    asciidoctor -b docbook -d book -a data-uri! -o index.xml README.asciidoc
+    fopub index.xml
+}
+
+_clean() {
+    rm -f index.html index.xml index.pdf
+}
+
+_clean_all() {
+    _clean
+}
+
+_tar() {
+    cd ..
+    tar cvfj $TUT.tar.bz2 $TUT/
+    cd - &> /dev/null
+}
+
+_init() {
+    rm -rf .git
+    git init .
+    git add .
+    git commit -m 'primeiro commit'
+    git remote add origin git@github.com:paulojeronimo/$TUT.git
+    git push -u origin master
+}
+
+_publish() {
+    local dt_hr=`date +"%Y%m%d-%H%M%S"`
+    local build_dir=/tmp/${TUT}-build_${USER}/$dt_hr
+    local commit_msg="publicação $dt_hr"
+
+    _clean
+    _html 
+    _pdf
+
+    mkdir -p $build_dir
+    cp index.* $build_dir/
+
+    if ! git branch | grep -q gh-pages
+    then
+        git checkout --orphan gh-pages || return $?
+        git rm -rf .
+    else
+        git checkout gh-pages || return $?
+    fi
+
+    cp $build_dir/* .
+    rm -rf $build_dir index.xml
+
+    git add .
+    git commit -m "$commit_msg"
+    git push origin gh-pages
+    git checkout master
+}
+
+OP=${1:-html}
+if type _$OP &> /dev/null 
+then 
+    _$OP
+else 
+    echo "Opção \"$OP\" inexistente!"
+fi
