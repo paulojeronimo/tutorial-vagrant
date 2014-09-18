@@ -422,7 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sobre">Sobre</a></li>
 <li><a href="#_introdução">Introdução</a></li>
 <li><a href="#_instalando_e_executando_boxes">Instalando e executando boxes</a></li>
-<li><a href="#_geando_um_box_próprio_utilizando_o_veewee">Geando um box próprio, utilizando o Veewee</a></li>
+<li><a href="#_gerando_um_box_próprio_utilizando_o_veewee">Gerando um box próprio, utilizando o Veewee</a></li>
 <li><a href="#_disponibilizando_o_box_gerado_no_vagrant_cloud">Disponibilizando o box gerado no Vagrant Cloud</a></li>
 <li><a href="#_conclusão">Conclusão</a></li>
 </ul>
@@ -467,6 +467,7 @@ $ sw_vers -productVersion
 10.9.4
 
 $ # Versão do Ruby:
+$ ruby -v
 ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin12.0]
 
 $ # Versão do VirtualBox:
@@ -492,7 +493,7 @@ mkdir -p $d &amp;&amp; cd $d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A execução do comando vagrant sem nenhum parâmetro apresenta-nos várias possibilidades. Execute o comando abaixo e observe sua saída:</p>
+<p>A execução do comando vagrant sem nenhum parâmetro apresenta-nos várias possibilidades. Executemos o comando abaixo para observar sua saída:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -500,7 +501,7 @@ mkdir -p $d &amp;&amp; cd $d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Temos várias opções disponíveis, não é? Por exemplo, para verificar a versão do Vagrant, execute:</p>
+<p>Temos várias opções disponíveis, não é? Por exemplo, para verificar a versão do Vagrant executemos o seguinte comando:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -508,10 +509,10 @@ mkdir -p $d &amp;&amp; cd $d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note também que, na primeira execução do Vagrant, será criado o diretório ~/.vagrant.d.</p>
+<p>Devemos notar também que, na primeira execução do Vagrant, será criado o diretório ~/.vagrant.d.</p>
 </div>
 <div class="paragraph">
-<p>Observe a estrutura desse diretório executando:</p>
+<p>Vejamos a estrutura desse diretório:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -519,7 +520,7 @@ mkdir -p $d &amp;&amp; cd $d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Sua saída deverá ser semelhante a que eu recebo em meu ambiente:</p>
+<p>A saída desse comando em meu ambiente é a seguinte:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -541,10 +542,10 @@ mkdir -p $d &amp;&amp; cd $d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para localizar os boxes (máquinas virtuais, na linguagem do Vagrant) disponíveis para a instalação acesse a URL <a href="https://vagrantcloud.com/discover/featured" class="bare">https://vagrantcloud.com/discover/featured</a>. Observe que nesse site você encontrará inúmeros boxes listados, produzidos por diferentes usuários. Note também que é possível criar o teu próprio box e publicá-lo pois há opções para isso (mais a frente discutiremos a esse respeito).</p>
+<p>Para localizar os boxes (VMs, na linguagem do Vagrant) disponíveis para a instalação acessemos a URL <a href="https://vagrantcloud.com/discover/featured" class="bare">https://vagrantcloud.com/discover/featured</a>. Observamos que nesse site são encontrados inúmeros boxes, produzidos por diferentes usuários. Podemos notar também que é possível criar nosso próprio box e publicá-lo pois há opções para isso (mais a frente discutiremos a esse respeito).</p>
 </div>
 <div class="paragraph">
-<p>Localizado o box que gostariamos de usar, vamos agora criar um novo diretório para iniciá-lo. Iniciaremos, por exemplo, um box Fedora 20. Execute:</p>
+<p>Localizado o box que gostaríamos de usar, vamos agora criar um novo diretório para iniciá-lo. Iniciaremos um box Fedora 20 executando:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -553,7 +554,7 @@ ls -la</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Observe, pela saída do último comando acima, que isso gerará um arquivo Vagrantfile no diretório corrente. Esse arquivo nada mais é que um código Ruby.  Veja o seu conteúdo:</p>
+<p>Pela saída do último comando acima, observemos que isso gerará um arquivo Vagrantfile no diretório corrente. Esse arquivo nada mais é que um código Ruby. Vejamos o seu conteúdo:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -561,7 +562,7 @@ ls -la</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para colocar o box que foi iniciado em execução, execute:</p>
+<p>Para colocar o box que foi iniciado em execução, executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -569,7 +570,7 @@ ls -la</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A saída desse comando apresenta alguns detalhes interessantes. Dentre as linhas mostradas, destaco as seguintes:</p>
+<p>A saída desse comando apresenta alguns detalhes interessantes. Dentre as linhas mostradas, notemos as seguintes:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -588,10 +589,10 @@ ls -la</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Observe que só há um adaptador de rede nessa box e que ele está configurado para usar NAT. Dessa forma, só conseguiríamos fazer um ssh para esse box através do uso de um túnel SSH reverso. O interessante é que o Vagrant já cria esse túnel para nós, facilitando nossa vida! =)</p>
+<p>Observemos que só há um adaptador de rede nessa box e que ele está configurado para usar NAT. Dessa forma, só conseguiríamos fazer um ssh para esse box através do uso de um túnel SSH reverso. O interessante é que o Vagrant já cria esse túnel para nós, facilitando nossa vida! =)</p>
 </div>
 <div class="paragraph">
-<p>Os curiosos também perceberão, fazendo a leitura da saída acima, que o SSH será feito do hospedeiro (HOST) para o box através da porta 2222. Num HOST Linux ou OS X, por exemplo, é possível verificar isso através do comando a seguir:</p>
+<p>Podemos perceber, pela leitura da saída acima, que o SSH será feito do hospedeiro (HOST) para o box através da porta 2222. Num HOST Linux ou OS X, por exemplo, é possível verificar isso através do comando a seguir:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -602,7 +603,7 @@ ls -la</code></pre>
 <p>Também podemos notar que o Vagrant já monta uma pasta compartilhada /vagrant associando-a ao diretório onde o box foi iniciado ~/tutorial-vagrant. Isso facilita a troca de arquivos entre e o box e o HOST.</p>
 </div>
 <div class="paragraph">
-<p>Um último detalhe é que, após colocarmos o box em execução, também é criado o diretório .vagrant, no diretório de inicialização do box. Perceba isso executando os comandos a seguir:</p>
+<p>Um último detalhe é que, após colocarmos o box em execução, também é criado o diretório .vagrant, no diretório de inicialização do box. Observemos isso executando os comandos a seguir:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -611,7 +612,7 @@ tree .vagrant</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para listar os boxes instalados (você pode estar qualquer diretório), execute:</p>
+<p>Para listar os boxes instalados (podemos estar qualquer diretório), executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -619,7 +620,7 @@ tree .vagrant</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Observe que, a saída do comando vagrant executado acima apresenta as informações do nome do box, o <code>provider</code> que está executando-o e sua versão:</p>
+<p>Observemos, pela saída do comando executado acima, que são apresentadas as informações do nome do box, o <code>provider</code> que está executando-o e sua versão:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -627,7 +628,7 @@ tree .vagrant</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Experimente, agora, fazer um ssh para o box. Execute:</p>
+<p>Experimentemos, agora, fazer um ssh para o box. Executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -635,7 +636,7 @@ tree .vagrant</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>No shell, dentro do box, execute:</p>
+<p>No shell, dentro do box, executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -646,7 +647,7 @@ logout</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para ver o status do box, execute:</p>
+<p>Para ver o status do box, executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -654,10 +655,10 @@ logout</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Observe que a saída desse comando nos informa que, para parar a VM, podemos executar um vagrant suspend ou um vagrant halt (esse último é como se fosse pressionar o botão <code>power off</code> da máquina com ela em funcionamento).</p>
+<p>Observemos que a saída desse comando nos informa que, para parar a VM, podemos executar um vagrant suspend ou um vagrant halt (esse último é como se fosse pressionar o botão <code>power off</code> da máquina com ela em funcionamento).</p>
 </div>
 <div class="paragraph">
-<p>Apenas suspenda a execução da VM:</p>
+<p>Suspendamos a execução da VM:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -665,7 +666,7 @@ logout</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Se você observar a tela de administração do VirtualBox, notará que a execução da VM foi suspensa. Você poderia desligar seu computador, ir tomar um café ou fazer qualquer outra coisa. Outra hora você poderia voltar e colocar a VM em funcionamento novamente. Mas, façamos isso agora:</p>
+<p>Se observarmos a tela de administração do VirtualBox, notaremos que a execução da VM foi suspensa. Poderíamos desligar o computador, ir tomar um café ou fazer qualquer outra coisa. Outra hora, poderíamos voltar e colocar a VM em funcionamento novamente. Mas, por agora, façamos isto:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -673,10 +674,18 @@ logout</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Entre novamente no shell da VM (vagrant ssh) e desligue a VM (shutdown -h now). Será solicitada a senha do usuário vagrant que, por padrão, é vagrant. Um detalhe: se você executar sudo shutdown -h now não será necessário informar nenhuma senha pois o usuário vagrant tem permissões de root, confomre configurações no arquivo /etc/sudoers.</p>
+<p>Enviemos um comando para desligar a VM, via SSH:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">ssh -p 2222 vagrant@localhost 'sudo shutdown -h now'</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Execute mais uma vez o comando a seguir. Ele deverá informar que a VM está no estado de desligada.</p>
+<p>Será solicitada a senha do usuário vagrant que, por padrão, é vagrant. Um detalhe: para evitar passar essa senha a cada execução do comando ssh, gere sua chave pública com o comando ssh-keygen (se ainda não tiver uma) e utilize o comando ssh-copy-id para inserí-la no arquivo ~/.ssh/authorized_keys do usuário vagrant. Note também que o usuário vagrant tem permissões de root, conforme as configurações definidas no arquivo /etc/sudoers.</p>
+</div>
+<div class="paragraph">
+<p>Executemos mais uma vez o comando a seguir. Ele deverá nos informar que a VM está no estado de desligada.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -684,7 +693,7 @@ logout</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Agora, removeremos o registro da VM. Para isso, serão necessários dois passos. O primeiro deles é observar a saída do comando a seguir:</p>
+<p>Agora, removamos o registro da VM. Para isso, serão necessários dois passos. O primeiro deles é executar e observar a saída do comando a seguir:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -709,7 +718,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>De posse do id do box podemos solicitar sua destruição, executando o comando a seguir (informe o id apresentado em tua saída):</p>
+<p>O que nos importa é o id do box. Com ele podemos solicitar sua destruição, executando o comando a seguir (informe o id apresentado em tua saída):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -717,13 +726,13 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Um detalhe a respeito desse id (5d24c9b): a cada vez que você destrói e inicializa uma nova VM, esse número muda.</p>
+<p>Um detalhe a respeito desse id (5d24c9b): a cada vez que destruímos e inicializamos uma nova VM, esse número muda.</p>
 </div>
 <div class="paragraph">
-<p>O comando vagrant destroy xxxxxxx forcará a parada da VM e também removerá seu registro do <code>provider</code> (no caso, o VirtualBox). Note, entretanto, que esse &#8220;destroy&#8221; na verdade só remove o box (VM) do VirtualBox (ou do <code>provider</code> em que ela estiver sendo utilizado). O box baixado ainda continua disponível para ser registrado novamente no VirtualBox pois ele permanece no diretório ~/.vagrant.d.</p>
+<p>O comando vagrant destroy &lt;id&gt; forcará a parada da VM e também removerá seu registro do <code>provider</code> (no caso, o VirtualBox). Notemos, entretanto, que esse &#8220;destroy&#8221; na verdade só remove o box (VM) do VirtualBox (ou do <code>provider</code> em que ela estiver sendo utilizado). O box baixado ainda continua disponível para ser registrado novamente no VirtualBox pois ele permanece no diretório ~/.vagrant.d.</p>
 </div>
 <div class="paragraph">
-<p>Agora, repita o comando tree ~/.vagrant.d e observe a estrutura final do <code>dotfile</code> do Vagrant:</p>
+<p>Agora, repitamos o comando tree ~/.vagrant.d e observemos a estrutura final do <code>dotfile</code> do Vagrant:</p>
 </div>
 <div class="paragraph">
 <p>Em meu ambiente, esta é a saída produzida:</p>
@@ -759,7 +768,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Faça um backup do diretório <code>dotfile</code> para testarmos um comando, logo a seguir:</p>
+<p>Façamos um backup do diretório <code>dotfile</code> para testarmos um comando logo a seguir:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -767,7 +776,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Agora, execute:</p>
+<p>Agora, executemos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -775,7 +784,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Observe, pela saída do comando a seguir, que o box foi eliminado do diretório ~/.vagrant.d:</p>
+<p>Observemos, pela saída do comando a seguir, que o box foi eliminado do diretório ~/.vagrant.d:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -783,7 +792,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Após ter feito isso, se for necessário executar novamente esse box o Vagrant terá que fazer o seu download outra vez. Como não queremos isso nesse instante, vamos simplesmente voltar o que tinhamos, através do rsync:</p>
+<p>Após termos feito isso, se for necessário executar novamente esse box o Vagrant terá que fazer o seu download outra vez. Como não queremos isso nesse instante, vamos simplesmente voltar o que tinhamos, através do rsync:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -791,24 +800,27 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Isso é o básico de Vagrant! Utilizando-o percebemos o quanto fica simples trabalhar com VMs, baixando-as de um repositório de VMs já existentes. Mas, agora vamos resolver outra questão: e se quisermos ter a nossa própria VM registrada nesse repositório?</p>
+<p>Isso é o básico de Vagrant! Utilizando-o percebemos o quanto fica simples trabalhar com VMs, baixando-as de um repositório de VMs já existentes. Mas, agora, resolvamos outra questão: e se quisermos ter a nossa própria VM registrada nesse repositório?</p>
 </div>
 <div class="paragraph">
 <p>É nesse ponto que entram as ferramentas <a href="https://github.com/mitchellh/packer">Packer</a>, ou o <a href="https://github.com/jedi4ever/veewee">Veewee</a>.</p>
 </div>
 <div class="paragraph">
-<p>O Packer é um projeto da própria <a href="http://www.hashicorp.com">HashiCorp</a>, a empresa fundada pelo <a href="https://github.com/mitchellh">Mitchell Hashimoto</a> e que está por trás do desenvolvimento do Vagrant. O Packer é desenvovido em <a href="http://golang.org/">Go</a> e, se quiséssemos fazer seu uso sem ser através dos <a href="http://www.packer.io/downloads.html">binários de instalação disponíveis</a>, precisaríamos de montar um ambiente de desenvolvimento para o trabalho com essa linguagem. Em próximos tutoriais falarei sobre o uso do Packer mas, se você já quiser ver exemplos de como construir VMs com o seu uso eu sugiro, por exemplo, que veja o projeto <a href="https://github.com/kaorimatz/packer-templates">packer-templates</a> do <a href="https://github.com/kaorimatz">Satashi Matsumoto</a>.</p>
+<p>O Packer é um projeto da própria <a href="http://www.hashicorp.com">HashiCorp</a>, a empresa fundada pelo <a href="https://github.com/mitchellh">Mitchell Hashimoto</a> e que está por trás do desenvolvimento do Vagrant. O Packer é desenvovido em <a href="http://golang.org/">Go</a> e, se quiséssemos fazer seu uso sem ser através dos <a href="http://www.packer.io/downloads.html">binários de instalação disponíveis</a>, precisaríamos de montar um ambiente de desenvolvimento para o trabalho com essa linguagem. Em próximos tutoriais eu falarei sobre o uso do Packer mas, se você já quiser ver exemplos de como construir VMs com o seu uso, eu sugiro, por exemplo, que você veja o projeto <a href="https://github.com/kaorimatz/packer-templates">packer-templates</a> do <a href="https://github.com/kaorimatz">Satashi Matsumoto</a>.</p>
 </div>
 <div class="paragraph">
-<p>O Veewee, por sua vez, é uma ferramenta Ruby e será utilizada nesse primeiro tutorial.</p>
+<p>O Veewee, por sua vez, é uma ferramenta Ruby. Utilizarei-o nesse primeiro tutorial.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_geando_um_box_próprio_utilizando_o_veewee">Geando um box próprio, utilizando o Veewee</h2>
+<h2 id="_gerando_um_box_próprio_utilizando_o_veewee">Gerando um box próprio, utilizando o Veewee</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Nosso primeiro passo será instalá-lo via <a href="http://guides.rubygems.org/command-reference/">gems</a>:</p>
+<p>Esse é um tópico avançado deste tutorial, consome algum tempo e é um processo tedioso (assim como citado na página <a href="http://docs.vagrantup.com/v2/boxes/base.html">"Creating a Base Box"</a>. Eu não espero que você consiga seguir-me em sua execução pois, para isso, você precisaria <a href="https://github.com/paulojeronimo/mirrors">criar um mirror local do Fedora</a> e, também, disponibilizá-lo através de um servidor HTTP em tua máquina, assim como eu faço em <a href="https://github.com/paulojeronimo/vms/">meu projeto vms</a>. Portanto, prosseguirei a execução deste tutorial sozinho e espero que você consiga voltar para cá e adaptar os comandos que apresento para o teu ambiente de forma que, em seguida, possa me dar um feedback positivo sobre sua execução.</p>
+</div>
+<div class="paragraph">
+<p>Para iniciar a criação de um box próprio, meu primeiro passo é instalar o Veewee através do <a href="http://guides.rubygems.org/command-reference/">gems</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -816,7 +828,7 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Para iniciar a definição de nossa VM, utilizaremos um template. E, para listar os templates disponíveis para a geração de um Fedora, por exemplo, executamos:</p>
+<p>Para definir minha VM, eu utilizo um template. E, para listar os templates disponíveis para a geração de um Fedora, por exemplo, executo:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -824,15 +836,18 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Iremos utilizar, como template de definição para o Fedora 20, o template Fedora-19-x86_64. Então, executaremos:</p>
+<p>Utilizarei, como template de definição para o Fedora 20, o template Fedora-19-x86_64. Então, executo:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">veewee vbox define Fedora-20-x86_64 Fedora-19-x86_64</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">veewee vbox define Fedora-20-x86_64 heisenbug64</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Esse comando gerará diversos arquivos, dentro do diretório corrente no diretório definitions. Vejamos quais:</p>
+<p>Heisenbug é o codenome oficial para o Fedora 20. Veja o <a href="https://fedoraproject.org/wiki/History_of_Fedora_release_names">histórico de codenomes do Fedora</a>.</p>
+</div>
+<div class="paragraph">
+<p>Esse comando gerará diversos arquivos, dentro do diretório corrente, no diretório definitions. Vejamos quais:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -840,12 +855,12 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Em meu ambiente, são apresentados os seguintes:</p>
+<p>Em meu ambiente, esta é a saída:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>definitions/
-`-- Fedora-20-x86_64
+`-- heisenbug64
     |-- base.sh
     |-- chef.sh
     |-- cleanup.sh
@@ -862,19 +877,19 @@ with Vagrant commands from any directory. For example:
 </div>
 </div>
 <div class="paragraph">
-<p>Agora, precisamos ajustar esses arquivos de acordo com nossas necessidades.</p>
+<p>Precisamos ajustar esses arquivos de acordo com nossas necessidades.</p>
 </div>
 <div class="paragraph">
-<p>Falando de meu caso particular, onde gero <a href="http://gdriv.es/vm-fedora">minha vm-fedora</a> e disponiblizo-a para que as pessoas possam executar alguns dos meus tutoriais, eu edito os arquivos ks.cfg e o definitions.rb. Baixe o <a href="http://github.com/paulojeronimo/vagrant-definitions">meu projeto vagrant-definitions</a> para poder comparar minhas alterações com relação a estrutura que o Veewee acabou de gerar no diretório corrente. Para isso, execute:</p>
+<p>No meu caso particular, onde gero <a href="http://gdriv.es/vm-fedora">minha vm-fedora</a> e disponiblizo-a para que as pessoas possam executar alguns dos meus tutoriais, eu edito os arquivos ks.cfg e o definitions.rb. Vou baixar o <a href="http://github.com/paulojeronimo/veewee-definitions">meu projeto veewee-definitions</a> para mostrar minhas alterações na estrutura que Veewee gerou localmente, na saída que apresentei acima. Farei isso executando os seguintes comandos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">git clone http://github.com/paulojeronimo/vagrant-definitions pj
+<pre class="highlight"><code class="language-bash" data-lang="bash">git clone http://github.com/paulojeronimo/veewee-definitions pj
 diff -r definitions pj/definitions</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A saída do diff acima, no momento em que escrevo este tutorial, é esta:</p>
+<p>A saída do diff, que apresentarei a seguir, poderá variar no futuro se o meu projeto veewee-definitions sofrer atualizações. Mas, no momento em que escrevo este tutorial, esta é a saída:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -899,7 +914,7 @@ diff -r definitions pj/definitions</code></pre>
 <p>As mudanças que eu faço no arquivo definition.rb são apenas para aumentar a memória da VM, diminuir o tamanho do seu disco e, na sua geração, utilizar o ISO e o mirror que tenho locais em minha máquina. Detalhe: eu crio e utilizo esse mirror local (veja como em <a href="http://github.com/paulojeronimo/mirrors">meu projeto mirrors</a>) pois, sem ele, o Veewee teria que baixar vários pacotes pela Internet e isso tornaria o processo de geração da VM ainda mais lento.</p>
 </div>
 <div class="paragraph">
-<p>Outro detalhe é que, antes de iniciar a construção da VM, o Veewee fará uma cópia de alguns ISOs para o diretório iso, casos eles já não estejam lá. Como, em meu caso, eu já possuo estes isos localmente no sistema de arquivos do meu Mac, eu executo os seguintes passos:</p>
+<p>Outro detalhe é que, antes de iniciar a construção da VM, o Veewee fará uma cópia de alguns ISOs para o diretório iso, casos eles já não estejam lá. Como, em meu caso, eu já possuo estes isos localmente no sistema de arquivos do meu Mac (na estrutura de diretórios do mirror do Fedora), eu executo os seguintes passos:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -926,7 +941,7 @@ veewee vbox build Fedora-20-x86_64</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>O processo de construção da VM levará algum tempo (de 5 a 15 minutos dependendo da velocidade de teu computador). Quando esse processo terminar, você pode executar o seginte comando para encerrar a execução do box gerado:</p>
+<p>O processo de construção da VM leva cerca de 10 minutos em meu Mac. Quando esse processo termina, eu executo o seginte comando para encerrar a execução do box gerado:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -934,7 +949,7 @@ veewee vbox build Fedora-20-x86_64</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para disponibilizar o box para uso do Vagrant, precisamos executar o comando a seguir:</p>
+<p>Para disponibilizar o box para uso do Vagrant, executo:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -942,7 +957,7 @@ veewee vbox build Fedora-20-x86_64</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Esse comando gerará o arquivo Fedora-20-x86_64.box no diretório corrente e apresentará a instrução para que esse box possa ser importado pelo Vagrant. Em meu caso, sua saída é essa:</p>
+<p>Esse último comando gera o arquivo Fedora-20-x86_64.box, no diretório corrente, e apresenta uma instrução para que esse box possa ser importado pelo Vagrant. No meu ambinte, sua saída é esta:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -966,7 +981,7 @@ vagrant ssh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Apenas para fazer um teste, seguiremos as instruções passadas:</p>
+<p>Para testar, o box gerado, eu sigo as instruções passadas:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -974,7 +989,7 @@ vagrant ssh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Como no diretório corrente já existe um Vagrantfile, precisaremos movê-lo para Vagrantfile.old, pois continuaremos o tutorial nesse mesmo diretório:</p>
+<p>Como no diretório corrente já existe um Vagrantfile, eu preciso movê-lo para Vagrantfile.old, pois continuo a execução deste tutorial nesse mesmo diretório:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -982,7 +997,7 @@ vagrant ssh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Agora iniciaremos o novo box que acabamos de importar:</p>
+<p>Inicio o novo box que acabei de importar:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -990,7 +1005,7 @@ vagrant ssh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para testar, executaremos o box e faremos um ssh para ele:</p>
+<p>Executo o box e faço um ssh para ele:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -999,7 +1014,7 @@ vagrant ssh</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Por fim, faremos a destruição do box:</p>
+<p>Por fim, faço destruição do box:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1007,7 +1022,7 @@ vagrant ssh</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>That&#8217;s all!</code> Sabemos que o box está funcionando. Nossa última tarefa é publicá-lo para que outras pessoas possam utilizá-lo.</p>
+<p><code>That&#8217;s all!</code> Agora sei que o box está funcionando. Minha última tarefa é publicá-lo para que outras pessoas possam utilizá-lo.</p>
 </div>
 </div>
 </div>
@@ -1015,7 +1030,7 @@ vagrant ssh</code></pre>
 <h2 id="_disponibilizando_o_box_gerado_no_vagrant_cloud">Disponibilizando o box gerado no Vagrant Cloud</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>O repositório de onde o Vagrant baixa as VMs (boxes) é o <a href="https://vagrantcloud.com/">Vagrant Cloud</a>. Dessa forma precisamos <a href="https://vagrantcloud.com/account/new">criar nossa conta nesse serviço</a> para poder utilizá-lo. Após criá-la, podemos configurar nossos próprios boxes.</p>
+<p>O repositório de onde o Vagrant baixa as VMs (boxes) é o <a href="https://vagrantcloud.com/">Vagrant Cloud</a>. Dessa forma preciso <a href="https://vagrantcloud.com/account/new">criar minha conta nesse serviço</a> para poder utilizá-lo e após criá-la, posso configurar meus próprios boxes.</p>
 </div>
 <div class="paragraph">
 <p>O site Vagrant Cloud apresenta um passo a passo muito simples para que possamos publicar nossos próprios boxes. É só segui-lo, não tem segredos e os passos são descritos na página <a href="https://vagrantcloud.com/help/boxes/create">Creating a new Box</a>! =) Num dos últimos passos é necessário informar uma URL para a localização do box (o arquivo com a extensão .box). No meu caso, eu informo o link público para o box que publico em minha conta no Google Drive. Por fim, depois de ter meu box publicado no Vagrant, eu posso utilizá-lo através do comando a seguir:</p>
@@ -1044,7 +1059,7 @@ vagrant ssh</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-08-31 22:17:13 BRT
+Last updated 2014-09-13 21:14:05 BRT
 </div>
 </div>
 </body>
