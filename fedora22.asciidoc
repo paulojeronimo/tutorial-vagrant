@@ -1,0 +1,67 @@
+= Vagrant + Fedora 22
+:toc:
+:toclevels: 3
+:author: Paulo Jerônimo
+:email: paulojeronimo@gmail.com
+
+== Executando uma box vagrant do Fedora 22 através do provedor libvirt instalado num Fedora 21
+
+* Pré-requisito: se estiver utilizando o RVM, desinstale-o com o comando `rvm implode`. Remova o arquivo `~/.profile` e as referências ao carregamento dele no arquivo `~/.bashrc`.
+* Execute:
+[source,bash]
+----
+$ wget -c http://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Base-Vagrant-22-20150521.x86_64.vagrant-libvirt.box
+$ dnf install -y vagrant-libvirt vagrant
+$ vagrant box add f22 Fedora-Cloud-Base-Vagrant-22-20150521.x86_64.vagrant-libvirt.box
+$ mkdir f22_test
+$ cd f22_test/
+$ cat > Vagrantfile <<EOF
+# -*- mode: ruby -*-
+# vi: set ft=ruby ts=2 sw=2 expandtab:
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "f22"
+
+  config.vm.provider "libvirt" do |libvirt|
+    libvirt.driver = "kvm"
+    libvirt.memory = 2048
+    libvirt.cpus = 4
+  end
+end
+EOF
+$ vagrant up
+----
+* A seguinte configuração pode ser realizada para que não seja solicitada uma senha a cada execução do comando `vagrant`:
+----
+$ cat << EOF | sudo tee -a /etc/polkit-1/localauthority/50-local.d/vagrant.pkla
+[Allow $USER libvirt management permissions]
+Identity=unix-user:$USER
+Action=org.libvirt.unix.manage
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+EOF
+----
+
+* Utilizando o VirtualBox quando o provider default é o `libvirt`:
+[source,bash]
+----
+$ vagrant up --provider=virtualbox
+----
+
+== Referências (ou artigos interessantes pra ler depois)
+
+* http://docs.vagrantup.com/v2/providers/basic_usage.html[Basic Provider Usage]
+* http://fabiorehm.com/blog/2013/11/12/set-the-default-vagrant-provider-from-your-vagrantfile/[Set the default Vagrant provider from your Vagrantfile]
+* http://fedoramagazine.org/using-fedora-22-atomic-vagrant-boxes/[Using Fedora 22 Atomic Vagrant Boxes]
+* https://getfedora.org/en/cloud/download/index.html[Download Fedora Cloud]
+* https://fedoraproject.org/wiki/Getting_started_with_virtualization[Getting started with virtualization]
+* https://ttboj.wordpress.com/2013/12/09/vagrant-on-fedora-with-libvirt/[Vagrant on Fedora with libvirt]
+* Utilização de LXC:
+** https://fedoraproject.org/wiki/LXC[LXC - FedoraProject]
+** https://github.com/fgrehm/vagrant-lxc/wiki/Usage-on-fedora-hosts[Usage on fedora hosts]
+** https://major.io/2014/04/21/launch-secure-lxc-containers-on-fedora-20-using-selinux-and-svirt/[Launch secure LXC containers on Fedora 20 using SELinux and sVirt]
+** http://fabiorehm.com/blog/2013/04/28/lxc-provider-for-vagrant/[LXC provider for Vagrant]
+** http://lost-and-found-narihiro.blogspot.com.br/2015/01/fedora-21-install-linux-container-lxc.html[Fedora 21 : install Linux container ( LXC ) on Fedora 21 and create a CentOS7 container]
